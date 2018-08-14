@@ -103,21 +103,21 @@ export class UserComponent implements OnInit, AfterViewInit {
       }
     });
   }
-  updateUser(_id: number, firstname: string, lastname: string, email: string, username: string) {
+  updateUser(user: User) {
     const dialogRef = this.dialog.open(UpdateUserDialogComponent, {
-      data: {_id, firstname, lastname, email, username },
+      data: { user: User},
       height: '368px',
       width: '630px',
     });
 
     dialogRef.afterClosed().subscribe((result) => {
       if (result) {
-        const relevantUser = _.find(this.dataSource.data, {_id});
+        const relevantUser = _.find(this.dataSource.data, user._id);
         const tempUser = _.assign({}, relevantUser, result);
 
         this.userService.update(tempUser)
-          .then((data) => {
-            const index = _.findIndex(this.dataSource.data, (user) => user._id === _id);
+          .then(() => {
+            const index = _.findIndex(this.dataSource.data, (usr) => usr._id === user._id);
             this.dataSource.data[index] = _.assign({}, relevantUser, result);
             this.dataSource.paginator = this.paginator;
           });
