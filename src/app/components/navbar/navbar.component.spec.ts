@@ -22,12 +22,7 @@ describe('navbar component', () => {
     shallow = new Shallow(NavbarComponent, ComponentsModule);
     TestBed.configureTestingModule({
       declarations: [NavbarComponent],
-      providers: [
-        { provide: Apollo, useValue: apolloMock },
-        HttpClient,
-        HttpHandler,
-        AuthenticationService,
-      ],
+      providers: [{ provide: Apollo, useValue: apolloMock }, HttpClient, HttpHandler, AuthenticationService],
       imports: [RouterTestingModule],
       schemas: [NO_ERRORS_SCHEMA],
     });
